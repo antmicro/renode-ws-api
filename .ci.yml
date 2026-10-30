@@ -1,0 +1,15 @@
+create-tag:
+  image: debian:trixie-slim
+  variables:
+    DEBIAN_FRONTEND: noninteractive
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME == "main"
+      - $TAG_POSTFIX
+  before_get_sources:
+    - apt -qqy update &> /dev/null
+    - apt -qqy install git jq
+  script:
+    - tag="v$(jq .version package.json | tr -d '"')$TAG_POSTFIX"
+    - git tag "$tag"
+    - git push origin refs/tags/"$tag":refs/tags/"$tag"
