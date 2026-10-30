@@ -1,6 +1,6 @@
 {
   "name": "renode-ws-api",
-  "version": "0.0.1",
+  "version": "1.6.0", // It had to be kept in sync with protocol version
   "description": "",
   "browser": "./dist/web.js",
   "main": "./dist/index.js",
